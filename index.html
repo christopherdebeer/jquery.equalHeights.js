@@ -1,0 +1,226 @@
+<html>
+<head>
+	<title>equalheights</title>
+	<style type="text/css">
+		body {
+			width: 600px;
+			margin: 50px auto;
+		}
+		p {margin-bottom: 50px;}
+		pre {}
+		#stillToDo {
+			margin-top: 80px;
+		}
+		ul.eqH {
+			overflow: auto;
+			padding:0;
+			margin:0;
+			margin-bottom: 20px;
+			display: block;
+			width: 600px;
+			clear: both;
+			margin-top: -25px;
+		}
+		ul.eqH li {
+			width: 130px;
+			float: left;
+			margin:0;
+			list-style: none;
+			background-color: #E0E1FA;
+			padding: 10px;
+			color: #656591;
+			font-family: Arial, "MS Trebuchet", sans-serif;
+			font-size: 10px;
+
+		}
+		ul.eqH li:nth-child(2n) {
+			background-color: #C0C1E8;
+		}
+
+		 /*unique diffs for testing*/
+
+		 #row1 li:last-child {
+			padding-top: 30px;
+		}
+
+		 #row2 li {
+			padding-top: 30px;
+			padding-bottom: 30px;
+		}
+
+		 #row3 li:nth-child(2n) { 
+			padding-bottom: 30px;
+		}
+
+	</style>
+	<script type="text/javascript" src="http://code.jquery.com/jquery.min.js"></script>
+	<script type="text/javascript" src="jquery.equalHeights-0.0.2.js"></script>
+
+	<!-- highlight.js stuff -->
+	<script type="text/javascript" src="http://yandex.st/highlightjs/6.1/highlight.min.js"></script>
+	<link rel="stylesheet" href="http://yandex.st/highlightjs/6.1/styles/github.min.css" type="text/css">
+	<script type="text/javascript">
+		// highlight code
+		hljs.tabReplace = '  ';
+		hljs.initHighlightingOnLoad();
+	</script>
+</head>
+<body>
+
+<h1>jQuery.equalHeights-0.0.2.js</h1>
+<p>
+	The equal heights script to end all equal heights scripts. The plan is, once this one is done, I will never need to write another, as all the use cases should already be accounted for.
+</p>
+<h3>Usage</h3>
+<pre>
+<code class="javascript">
+$(".equalHeights").equalHeights(options);
+</code>
+</pre>
+<h3>Defaults &amp; Options</h3>
+<pre><code class="javascript">
+$("ul li").equalHeights({
+	cols: 2,			// any integer > 0
+	accountForPadding: false,	// true , false
+	padding: false,		// true / "both", "bottom", "top", false
+	margin: false,		// true / "both", "bottom", "top", false
+	animation: false,		// true / "slow", "normal", "fast", false
+	animationCallback: undefined	// callback on completion of animation
+});
+</code></pre>
+
+
+<h2>Examples</h2>
+
+<pre>
+<code class="javascript">
+$("#row0 li").equalHeights({
+	cols: 4,
+});
+</code>
+</pre>
+<ul class="eqH" id="row0">
+	<li>One liner</li>
+	<li>This is on<br/>two lines</li>
+	<li>Another one liner</li>
+	<li>Whoa<br/>three whole<br/>lines</li>
+</ul>
+
+<pre>
+<code class="javascript">
+$("#row1 li").equalHeights({
+	cols: 4,
+	padding: "bottom",
+	animation: "slow"
+});
+</code>
+</pre>
+<ul class="eqH" id="row1">
+	<li>One liner</li>
+	<li>This is on<br/>two lines</li>
+	<li>Another one liner</li>
+	<li>Whoa<br/>three whole<br/>lines</li>
+</ul>
+
+
+<pre>
+<code class="javascript">
+$("#row2 li").equalHeights({
+	// cols will default to 2
+	padding: "top",
+	animation: "slow",
+	animationCallback: function (x) {
+		console.log("animation callback called.", x);
+	}
+});
+</code>
+</pre>
+<ul class="eqH" id="row2">
+	<li>One liner</li>
+	<li>This is on<br/>two lines</li>
+	<li>Another one liner</li>
+	<li>Whoa<br/>three whole<br/>lines</li>
+</ul>
+
+
+<pre>
+<code class="javascript">
+$("#row3 li").equalHeights({
+	cols: 4,
+	padding: "bottom"
+});
+</code>
+</pre>
+<ul class="eqH" id="row3">
+	<li>One liner</li>
+	<li>This is on<br/>two lines</li>
+	<li>Another one liner</li>
+	<li>Whoa<br/>three whole<br/>lines</li>
+</ul>
+
+<pre>
+<code class="javascript">
+$("#row4 li").equalHeights({
+	cols: 4,
+	margin: "top",
+	animation: "fast"
+});
+</code>
+</pre>
+<ul class="eqH" id="row4">
+	<li>One liner</li>
+	<li>This is on<br/>two lines</li>
+	<li>Another one liner</li>
+	<li>Whoa<br/>three whole<br/>lines</li>
+</ul>
+
+<h2 id="stillToDo">Still to do</h2>
+<ol>
+	<li>padding: "both"</li>
+	<li>margin: "both"</li>
+	<li>accountForPadding: true</li>
+	<li>combinations of paddings and margins</li>
+	<li>live mode to continually update heights on change</li>
+</ol>
+
+<script type="text/javascript">
+
+	(function($) {
+		$(document).ready(function(){
+
+			$("#row0 li").equalHeights({
+				cols: 4,
+			});
+
+			$("#row1 li").equalHeights({
+				cols: 4,
+				padding: "bottom",
+				animation: "slow",
+				animationCallback: function (x) {
+					console.log("animation callback called.", x);
+				}
+			});
+
+			$("#row2 li").equalHeights({
+				// cols will default to 2
+				padding: "top",
+				animation: "slow",
+				animationCallback: function (x) {
+					console.log("animation callback called.", x);
+				}
+			});
+			$("#row3 li").equalHeights({
+				cols: 4,
+				padding: "bottom"
+			});
+
+			$("#row4 li").equalHeights({
+				cols: 4,
+				margin: "top",
+				animation: "fast"
+			});
+		});
+	})(jQuery);
+</script>
+</body>
+</html>
