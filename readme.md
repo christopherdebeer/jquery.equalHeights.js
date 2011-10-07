@@ -7,20 +7,20 @@ Usage
 -------
 
 
-`$(".equalHeights").equalHeights(options);`
+    $(".equalHeights").equalHeights(options);
 
 Defaults & Options
 ------------------
 
 
-```$("ul li").equalHeights({
-  cols: 2,			// any integer > 0
-  accountForPadding: false,	// true , false
-  padding: false,		// true / "both", "bottom", "top", false
-  margin: false,		// true / "both", "bottom", "top", false
-  animation: false,		// true / "slow", "normal", "fast", false
-  animationCallback: undefined	// callback on completion of animation
-});```
+    $("ul li").equalHeights({
+      cols: 2,			// any integer > 0
+      accountForPadding: false,	// true , false
+      padding: false,		// true / "both", "bottom", "top", false
+      margin: false,		// true / "both", "bottom", "top", false
+      animation: false,		// true / "slow", "normal", "fast", false
+      animationCallback: undefined	// callback on completion of animation
+    });
 
 Examples
 --------
