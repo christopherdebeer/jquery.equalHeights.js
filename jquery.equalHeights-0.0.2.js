@@ -1,9 +1,5 @@
 /**
- * Generic equalHeights
- *
- * @version 0.0.2
- * @author Brian Coit <brian@line.uk.com>
- * @contributor Christopher de Beer <christopher@line.uk.com>
+ * jquery.equalHeights
  *
  */
 (function ($) {
