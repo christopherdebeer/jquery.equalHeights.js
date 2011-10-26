@@ -89,13 +89,26 @@ $(".equalHeights").equalHeights(options);
 <pre><code class="javascript">
 $("ul li").equalHeights({
 	cols: 2,			// any integer > 0
-	accountForPadding: false,	// true , false
+	accountForPadding: true,	// true , false
 	padding: false,		// true / "both", "bottom", "top", false
 	margin: false,		// true / "both", "bottom", "top", false
 	animation: false,		// true / "slow", "normal", "fast", false
 	animationCallback: undefined	// callback on completion of animation
 });
 </code></pre>
+
+<h3>Reset / Undo</h3>
+<pre>
+<code class="javascript">
+// to undo equalHeights, 
+// and set the elements to their original state 
+// do the following
+
+$(".eqH").equalHeights.reset();	
+</code>
+</pre>
+
+<a href="javascript:$('.eqH').equalHeights.reset();">Click here to Reset examples</a> || <a href="javascript:window.eqHexamples(jQuery);">Click here to redo all examples</a>
 
 
 <h2>Examples</h2>
@@ -119,7 +132,8 @@ $("#row0 li").equalHeights({
 $("#row1 li").equalHeights({
 	cols: 4,
 	padding: "bottom",
-	animation: "slow"
+	animation: "slow",
+	accountForPadding: false
 });
 </code>
 </pre>
@@ -171,7 +185,7 @@ $("#row3 li").equalHeights({
 $("#row4 li").equalHeights({
 	cols: 4,
 	margin: "top",
-	animation: "fast"
+	animation: "slow"
 });
 </code>
 </pre>
@@ -193,40 +207,44 @@ $("#row4 li").equalHeights({
 
 <script type="text/javascript">
 
+window.eqHexamples = function($){
+	$("#row0 li").equalHeights({
+		cols: 4,
+	});
+
+	$("#row1 li").equalHeights({
+		cols: 4,
+		padding: "bottom",
+		animation: "slow",
+		animationCallback: function (x) {
+			console.log("animation callback called.", x);
+		},
+		accountForPadding: false
+	});
+
+	$("#row2 li").equalHeights({
+		// cols will default to 2
+		padding: "top",
+		animation: "slow",
+		animationCallback: function (x) {
+			console.log("animation callback called.", x);
+		}
+	});
+	$("#row3 li").equalHeights({
+		cols: 4,
+		padding: "bottom"
+	});
+
+	$("#row4 li").equalHeights({
+		cols: 4,
+		margin: "top",
+		animation: "slow"
+	});
+};
+
 	(function($) {
 		$(document).ready(function(){
-
-			$("#row0 li").equalHeights({
-				cols: 4,
-			});
-
-			$("#row1 li").equalHeights({
-				cols: 4,
-				padding: "bottom",
-				animation: "slow",
-				animationCallback: function (x) {
-					console.log("animation callback called.", x);
-				}
-			});
-
-			$("#row2 li").equalHeights({
-				// cols will default to 2
-				padding: "top",
-				animation: "slow",
-				animationCallback: function (x) {
-					console.log("animation callback called.", x);
-				}
-			});
-			$("#row3 li").equalHeights({
-				cols: 4,
-				padding: "bottom"
-			});
-
-			$("#row4 li").equalHeights({
-				cols: 4,
-				margin: "top",
-				animation: "fast"
-			});
+			window.eqHexamples($)
 		});
 	})(jQuery);
 </script>

@@ -7,10 +7,11 @@
         
         options = $.extend({
             cols: 2,                            // any integer > 0
-            accountForPadding: false,           // true , false
+            accountForPadding: true,            // true , false
             padding: false,                     // true / "both", "bottom", "top", false
             margin: false,                      // true / "both", "bottom", "top", false
             animation: false,                   // true / "slow", "normal", "fast", false
+            live: false,                        // truem , false
             animationCallback: function(){}     // callback on completion of animation
         }, options);
 
@@ -36,8 +37,17 @@
             // check heigths
             for (var l in el) {
 
+                el[l].addClass("eqH")
+                    .data("eqH-original",{
+                        "padding-top": el[l].css("padding-top"),
+                        "padding-bottom": el[l].css("padding-bottom"),
+                        "margin-top": el[l].css("margin-top"),
+                        "margin-bottom": el[l].css("margin-bottom"),
+                        "height": el[l].height()
+                    });
+
             	// if padding not to be taken into account
-                if (!options.padding) {
+                if (!options.accountForPadding) {
                 	if (el[l].height() > z) {
 	                    z = el[l].height();
 	                }
@@ -151,6 +161,21 @@
                 }
             }
 
+        };
+        $.fn.equalHeights.reset = function () {
+            $(".eqH").each(function(i,el){
+
+                var originalStyles;
+                if (originalStyles = $(el).data("eqHOriginal")) {
+
+                    $.each(originalStyles, function(key,val) {
+                        $(el).css(key,val);
+                    });
+                    $.removeData(el, "eqHOriginal");
+
+                }               
+                    
+            });
         }
 
     }
